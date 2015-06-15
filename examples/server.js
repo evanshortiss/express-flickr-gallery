@@ -4,13 +4,14 @@ var express = require('express')
   , path = require('path')
   , app = express()
   , port = 8001
+  , route = '/gallery'
   , middleware = require('../index.js').middleware;
 
 // Use any view engine that you like...
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, './views'));
 
-app.use('/gallery', middleware.init(express, {
+app.use(route, middleware.init(express, {
   flickr: {
     // If you place albums IDs in the below array then only those will be
     // shown in the list
@@ -31,5 +32,8 @@ app.listen(port, function (err) {
     throw err;
   }
 
-  console.log('Example server listening on port %s', port)
+  console.log('Example server listening on port %s.', port);
+  console.log('Go to 127.0.0.1:%s%s', port, route);
+  console.log('Make sure to set the env vars FLICKR_API_KEY, FLICKR_SECRET' +
+    'FLICKR_USER_ID or to replace them in exmaples/server.js.');
 });
