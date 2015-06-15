@@ -73,9 +73,11 @@ following:
   // Optional object that contains classes to apply to the rendered html
   // this will allow you to easily style and integrate this with your site
   renderer: {
-    container: 'container-class',
-    row: 'row-class',
-    col: 'col-class'
+    classNames: {
+      container: 'container-class',
+      row: 'row-class',
+      col: 'col-class'
+    }
   },
 
   // Options related to integrating with the flickr api
@@ -97,3 +99,27 @@ following:
 }
 
 ```
+
+### API
+You can also use this library to get a simplified JSON object representing
+your albums and their content.
+
+##### init(opts callback)
+Intialises the API. _opts_ can contain the following options.
+
+* **api_key** - Your flickr API
+* **secret** - Your flickr API secret
+* **user_id** - Your flickr user ID
+* **albums** - The IDs of albums you'd like to restrict displaying. If left
+empty all albums will be shown. If populated, only albums in the array will be
+shown.
+
+##### getAlbumList(callback)
+Get all your albums, or the ones specified in the albums _param_ supplied to
+init.
+
+
+##### getAlbum(id, callback)
+Get the contents of an album using its ID.
+
+
