@@ -1,0 +1,9 @@
+doctype html
+html
+	head
+		title express-flickr example album list
+	body
+		h1 Album List
+		// This variable is provided by the middleware and is
+		// the html representing an album list
+		div!= expressFlickrHtml

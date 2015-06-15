@@ -1,0 +1,8 @@
+div(class="#{options.classNames.container}")
+	div(class="#{options.classNames.row}")
+		each ablum, i in data
+			div(class="#{options.classNames.col}")
+				a(href="#{data[i].albumLink}")
+					img(src="#{data[i].coverUrl}")
+				p= data[i].name
+				small= data[i].desc

@@ -1,0 +1,8 @@
+h2= data.title
+
+div(class="#{options.classNames.container}")
+	div(class="#{options.classNames.row}")
+		each image, i in data.images
+			div(class="#{options.classNames.col}")
+				img(src="#{data.images[i].url}")
+				p= data.images[i].title
