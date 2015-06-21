@@ -2,8 +2,39 @@ doctype html
 html
 	head
 		title express-flickr example album list
+		style.
+			body {
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+				font-weight: 300;
+				-webkit-font-smoothing: antialiased;
+			}
+			div.col-xs-4 div {
+				background-position: 50% 50%;
+				margin: 16vh;
+				min-height: 100vh;
+				background-repeat: no-repeat;
+			}
+			.album-list .col-xs-4 {
+				padding: 2.5em;
+			}
+			.col-xs-4 img {
+				-webkit-transition: all 0.3s;
+				transition: all 0.3s;
+				width: 100%;
+			}
+			.col-xs-4 img:hover {
+				opacity: 0.8;
+			}
+			.col-xs-4 p {
+				margin-top: 2em;
+			}
+			.col-xs-4 p, .col-xs-4 small {
+				display: block;
+				text-align: center;
+			}
 	body
-		h1 Album List
+		center
+			h1 Album List
 		// This variable is provided by the middleware and is
 		// the html representing an album list
-		div!= expressFlickrHtml
+		div.album-list!= expressFlickrHtml
