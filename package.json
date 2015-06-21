@@ -1,7 +1,7 @@
 {
   "name": "express-flickr-gallery",
   "version": "0.1.0",
-  "description": "Integrate your flickr albums into an epxress web application",
+  "description": "Retrieve and/or integrate your flickr albums into an express web application",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*.js",
