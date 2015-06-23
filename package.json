@@ -1,12 +1,13 @@
 {
   "name": "express-flickr-gallery",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Retrieve and/or integrate your flickr albums into an express web application",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*.js",
     "lint": "jshint ./lib/*.js"
   },
+  "repository": "git@github.com:evanshortiss/express-flickr-gallery.git",
   "keywords": [
     "flickr",
     "express",
