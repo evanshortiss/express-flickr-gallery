@@ -38,22 +38,36 @@ var express = require('express')
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, './views'));
 
-app.use('/gallery', flickr.middleware.init(express, {
-  flickr: {
-    // If you place albums IDs in the below array then only those will be
-    // shown in the list and all your other albums are ignored
-    // albums: []
-    api_key: process.env.FLICKR_API_KEY,
-    secret: process.env.FLICKR_SECRET,
-    user_id: process.env.FLICKR_USER_ID
-  },
-  templates: {
-    // The strings here should correspond to your views that the express-flickr
-    // partials will be rendered in
-    albumList: 'album-list',
-    album: 'album-page'
+// Load the gallery middleware
+// This is asynchronous so it can take a few seconds
+function loadFlickrMiddleware () {
+  flickr.middleware.init(express, {
+    flickr: {
+      // If you place albums IDs in the below array then only those will be
+      // shown in the list and all your other albums are ignored
+      // albums: []
+      api_key: process.env.FLICKR_API_KEY,
+      secret: process.env.FLICKR_SECRET,
+      user_id: process.env.FLICKR_USER_ID
+    },
+    templates: {
+      // The strings here should correspond to your views that the express-flickr
+      // partials will be rendered in
+      albumList: 'album-list',
+      album: 'album-page'
+    }
+  }, onGalleryInitialised);
+}
+
+// Called once the gallery has initialised
+function onGalleryInitialised (err, router) {
+  if (err) {
+    console.error('Failed to init flickr middleware. Retry in 5 seconds');
+    setTimeout(loadFlickrMiddleware, 5000);
+  } else {
+    app.use('/gallery', router);
   }
-}));
+}
 
 app.listen(port, function (err) {
   if (err) {
@@ -85,10 +99,11 @@ html
 The middleware API is straightforward to use as it exposes only a single
 function.
 
-##### init(express, opts)
+##### init(express, opts[, callback])
 The init function must be provided an instance of _express_ as the first
-parameter, you should use express 4+. _opts_ should be an Object containing the
-following:
+parameter, you should use express 4+. An optional callback can also be supplied
+and is receommended to handle errors in the event that the flickr API is
+unavailble. _opts_ should be an Object containing the following:
 
 ```javascript
 
