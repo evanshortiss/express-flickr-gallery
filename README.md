@@ -38,27 +38,6 @@ var express = require('express')
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, './views'));
 
-// Load the gallery middleware
-// This is asynchronous so it can take a few seconds
-function loadFlickrMiddleware () {
-  flickr.middleware.init(express, {
-    flickr: {
-      // If you place albums IDs in the below array then only those will be
-      // shown in the list and all your other albums are ignored
-      // albums: []
-      api_key: process.env.FLICKR_API_KEY,
-      secret: process.env.FLICKR_SECRET,
-      user_id: process.env.FLICKR_USER_ID
-    },
-    templates: {
-      // The strings here should correspond to your views that the express-flickr
-      // partials will be rendered in
-      albumList: 'album-list',
-      album: 'album-page'
-    }
-  }, onGalleryInitialised);
-}
-
 // Called once the gallery has initialised
 function onGalleryInitialised (err, router) {
   if (err) {
@@ -77,6 +56,26 @@ function onGalleryInitialised (err, router) {
     });
   }
 }
+
+// Load the gallery middleware
+// This is asynchronous so it can take a few seconds pending connection
+// speed and the flickr API availability
+flickr.middleware.init(express, {
+  flickr: {
+    // If you place albums IDs in the below array then only those will be
+    // shown in the list and all your other albums are ignored
+    // albums: []
+    api_key: process.env.FLICKR_API_KEY,
+    secret: process.env.FLICKR_SECRET,
+    user_id: process.env.FLICKR_USER_ID
+  },
+  templates: {
+    // The strings here should correspond to your views that the express-flickr
+    // partials will be rendered in
+    albumList: 'album-list',
+    album: 'album-page'
+  }
+}, onGalleryInitialised);
 ```
 
 Now you need to simply create the _album-page_ and _album-list_ templates. I
