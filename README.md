@@ -66,16 +66,17 @@ function onGalleryInitialised (err, router) {
     setTimeout(loadFlickrMiddleware, 5000);
   } else {
     app.use('/gallery', router);
+    
+    // Start to listen now that all routes are loaded
+    app.listen(port, function (err) {
+      if (err) {
+        throw err;
+      }
+    
+      console.log('Example server listening on port %s', port)
+    });
   }
 }
-
-app.listen(port, function (err) {
-  if (err) {
-    throw err;
-  }
-
-  console.log('Example server listening on port %s', port)
-});
 ```
 
 Now you need to simply create the _album-page_ and _album-list_ templates. I
