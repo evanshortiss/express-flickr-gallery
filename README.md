@@ -148,12 +148,13 @@ your albums and their content.
 ##### init(opts, callback)
 Intialises the API. _opts_ can contain the following options.
 
-* **api_key** - Your flickr API
-* **secret** - Your flickr API secret
-* **user_id** - Your flickr user ID
-* **albums** - The IDs of albums you'd like to restrict displaying. If left
+* **api_key** - (required) Your flickr API
+* **secret** - (required) Your flickr API secret
+* **user_id** - (required) Your flickr user ID
+* **albums** - (optional) The IDs of albums you'd like to restrict displaying. If left
 empty all albums will be shown. If populated, only albums in the array will be
 shown.
+* **cache_expiry** - (optional) The amount of time in milliseconds to keep the in-memory cache of albums from flickr
 
 ##### getAlbumList(callback)
 Get all your albums, or the ones specified in the albums _param_ supplied to
