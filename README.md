@@ -45,13 +45,13 @@ function onGalleryInitialised (err, router) {
     setTimeout(loadFlickrMiddleware, 5000);
   } else {
     app.use('/gallery', router);
-    
+
     // Start to listen now that all routes are loaded
     app.listen(port, function (err) {
       if (err) {
         throw err;
       }
-    
+
       console.log('Example server listening on port %s', port)
     });
   }
@@ -164,4 +164,6 @@ init.
 ##### getAlbum(id, callback)
 Get the contents of an album using its ID.
 
+### Contributors
+Ben Salinas (bsalinas)
 
